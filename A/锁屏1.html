@@ -1,0 +1,56 @@
+<!DOCTYPE html><html>
+<head>
+<meta charset=" utf-8">
+<title>蚂蚁部落</title>
+<script type="text/javascript">
+window.onload=function(){
+  if(document.cookie.indexOf('lock=1')!= -1){
+    ShowContent(false);
+  }
+ 
+  //10s后锁定，修改delay为你需要的时间，单位毫秒
+  var delay = 10 * 1000,timer;
+  function startTimer(){
+    clearTimeout(timer);
+    timer = setTimeout(TimerHandler, delay);
+  }
+ 
+  function TimerHandler(){
+    document.cookie = 'lock=1';
+    //锁定后移除鼠标移动事件
+    document.onmousemove = null;
+    ShowContent(false);
+  }
+  function ShowContent(show){
+    document.getElementById('dvContent').style.display = show ? 'block' : 'none';
+    document.getElementById('dvPassword').style.display = show ? 'none' : 'block';
+  }
+ 
+  function check(){
+    if(document.getElementById('txtPwd').value == '123'){
+      document.cookie = 'lock=0';
+      ShowContent(true);
+      startTimer()//重新计时
+      document.onmousemove = startTimer; //重新绑定鼠标移动事件
+    }
+    else{
+      alert('密码不正确');
+    }
+  }
+ 
+  document.onmousemove=startTimer;
+  var obt=document.getElementById("bt");
+  obt.onclick=function(){
+    check();
+  }
+  startTimer();
+}
+</script>
+</head>
+<body>
+<div id="dvContent">123123123</div>
+<div id="dvPassword" style="display:none">
+  输入密码:<input type="password" id="txtPwd" /><input type="button" id="bt" value="确定"/>
+</div>
+</body>
+</html>

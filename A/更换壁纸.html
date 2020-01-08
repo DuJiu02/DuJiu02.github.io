@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>设置背景图片</title>
+	<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+	<script src="js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		#volet li{
+			list-style-type: none;
+			float: left;
+			padding: 10px;
+			font-size: 20px;
+			color: #fff;
+			
+		}
+		#volet{
+			width: 900px;
+			height: 500px;
+			overflow-y: auto;
+		}
+		.img{
+			display: block;
+			width: 200px;
+			height: 130px;
+			background-size: 200px 160px;
+			cursor: pointer;
+			transition: all 0.6s;
+			border-radius: 10%;
+		}
+		.img:hover{
+			transform: scale(0.9);
+		} 
+	</style>
+</head>
+ 
+<body>
+	<script type="text/javascript">
+//上传
+function lastname(){
+	//获取欲上传的文件路径
+	var filepath = document.getElementById("updatefile").value;
+	//为了避免转义反斜杠出问题，这里将对其进行转换
+	var re = /(\\+)/g;
+	var filename=filepath.replace(re,"#");
+	//对路径字符串进行剪切截取
+	var one=filename.split("#");
+	//获取数组中最后一个，即文件名
+	var two=one[one.length-1];
+	//再对文件名进行截取，以取得后缀名
+	var three=two.split(".");
+	//获取截取的最后一个字符串，即为后缀名
+	var last=three[three.length-1];
+	//添加需要判断的后缀名类型
+	var tp ="jpg,gif,bmp,png,jpeg,ico,JPG,GIF,BMP,PNG,JPEG,ico";
+	//返回符合条件的后缀名在字符串中的位置
+	var rs=tp.indexOf(last);
+	//如果返回的结果大于或等于0，说明包含允许上传的文件类型
+	if(rs>=0){
+		return true;
+	}else{
+		alert("您选择的上传文件不是有效的图片文件！");
+		return false;
+	}
+}
+
+$(function(){
+	document.querySelector("#updatefile").addEventListener("change",function(){
+	//alert(document.querySelector("#f").value);
+	var file = document.querySelector("#updatefile").files[0];
+	//console.log(file);
+	var reder = new FileReader();
+	//reder.readAsBinaryString(file);
+	reder.readAsDataURL(file);
+	//reder.readAsText(file);
+	reder.onload=function(){
+		console.log(reder.result);
+		document.querySelector("#uimg").src=reder.result;
+	};
+	
+	});
+});
+	</script>
+<div class="layui-tab">
+  <ul class="layui-tab-title">
+    <li class="layui-this">网站设置</li>
+    <li>用户管理</li>
+  </ul>
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show">
+		<div id="volet">
+			<p style="font-size: 15px;font-weight: bold;margin: 10px;color: deepskyblue;">双击即可更换图片</p>
+			<li><center><img ondblclick="confirm('确认更换图片？')" src="images/bgimg.jpg" class="img">1</li>
+			<li><center><img ondblclick="confirm('确认更换图片？')" src="images/bgimg2.jpg" class="img">2</center></li>
+			<li><center><img ondblclick="confirm('确认更换图片？')" src="images/bgimg3.png" class="img">3</center></li>
+			<li><center><img ondblclick="confirm('确认更换图片？')" src="images/bgimg4.jpeg" class="img">4</center></li>
+			<li><center><img ondblclick="confirm('确认更换图片？')" src="images/bgimg5.jpg" class="img">4</center></li>
+			<li><center><img src="images/file.png" class="img"></center></li>
+		</div>
+	</div>
+    <div class="layui-tab-item">
+		<form class="layui-form" action="" method="post" enctype="multipart/form-data" onsubmit="return lastname()">
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">主题名称</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="simg.imgName" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		    </div>
+		  </div>
+		  
+		  <div class="layui-form-item">
+			  <label class="layui-form-label">主题大图</label>
+			  <div class="layui-input-block">
+				  <input type="file" name="photo" accept="image/*" class="hidden" id="updatefile" />
+				  <img src="" id="uimg" width="200x" height="160px" style="margin-left: 200px;" />
+			  </div>
+		  </div>
+
+		  <div class="layui-form-item">
+		    <div class="layui-input-block">
+		      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+		    </div>
+		  </div>
+		</form>
+	</div>
+  </div>
+</div>
+      
+	
+	
+	
+	
+</body>
+<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	layui.use('element', function(){
+	  var element = layui.element;
+	});
+</script>
+</html>

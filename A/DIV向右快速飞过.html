@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		.box{
+			position: relative;
+			width: 100px;
+			height: 100px;
+			border: 1px solid red;
+			margin: 5px;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+		    <div class="box" id="id"></div>
+			<div class="box" id="id"></div>
+			<div class="box" id="id"></div>
+			<div class="box" id="id"></div>
+		</div>
+		<li onclick="a(1)"><input type="button" value="向右" class="right"></li>
+		<li onclick="a(2)"><input type="button" value="向右2" class="right"></li>
+		<script>
+		    // var id=document.getElementById("id");
+		    function a(a){
+				var t;
+				var timer=null;
+				var startTime = Date.now();
+				//获取多个ID
+				var articleIdList = new Array();
+				var id = $("div#id");
+				if(id.val() != undefined || id.val() != null){
+				console.log("进入IF判断");	
+				
+		        timer=setInterval(function(){
+					for (var i = 0;i< id.length; i++) {
+						var leftDis = id[i].offsetLeft+0.1*(Date.now()-startTime)/2;
+						leftDis = leftDis > 1500 ? 1500 : leftDis;
+		                id[i].style.left=leftDis+'px';
+						console.log("进入开始:");
+					};
+		        },1);
+				
+				
+				var t2 = setInterval(function(){
+						$("#div1").empty();
+						console.log("准备添加");
+						$("#div1").append(
+						"<div class='box' id='id'></div>"+
+						"<div class='box' id='id'></div>"+
+						"<div class='box' id='id'></div>"+
+						"<div class='box' id='id'></div>"+
+						"<div class='box' id='id'></div>"
+						);
+						 window.clearInterval(timer);
+						 window.clearInterval(t2);
+				},300);
+				
+				}else{
+					window.clearInterval(timer)
+					window.clearInterval(t2);
+				}
+		    };
+		</script>
+	</body>
+</html>

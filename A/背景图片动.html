@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css+js让背景图片动起来</title>
+    <style>
+        #section{
+            margin:0 auto;
+            background:url(images/bgimg.jpg);
+            background-position-x: 0px;
+            background-position-y: 0px;
+            background-repeat: repeat;
+        }
+    </style>
+</head>
+<body id="section">
+
+
+<script src="js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var section = $('#section');
+    var x =0;
+    function polling() {
+        x += 5;
+        section.animate({
+            'background-position-x': x+'%',
+        }, 400, 'linear');
+        setTimeout(polling,300)
+    }
+    polling();
+</script>
+
+</body>
+</html>

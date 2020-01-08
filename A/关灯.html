@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>开关灯</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="b1" type="button">开灯</button>
+		<button id="b2" type="button">关灯</button>
+		<br>
+		<img id="img1" src="images/1.png">
+		<input type="text" id="" value="" />
+	</body>
+</html>
+<script src="js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	// 给button1添加事件,把背景色设置为白色
+	$('#b1').click(function() {
+		$('body').css("background-color", "transparent");
+	});
+	// 给button2添加事件,把背景色设置为黑色
+	$('#b2').click(function() {
+		$('body').css({
+						"background-color":"#000",
+						"opacity":"0.6"
+					});
+	});
+</script>

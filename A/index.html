@@ -1,0 +1,776 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>WebOS+</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/admin/global.css">
+	<link rel="stylesheet" type="text/css" href="plugin/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="plugin/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<style type="text/css">
+		/* 设置背景色 */
+		#section{
+			background-image: url(images/bgimg2.jpg);
+			background-size: 100%;
+		}
+		
+		/* win下边透明 */
+		.taskbar-opacity{ opacity:0;background:#5aa2cb;width:100%; height:40px; bottom:0; position:absolute;z-index:9999;}
+		
+		/* 右键菜单 */
+		.shade{
+			width:100%;
+			height: 100%;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+		.wrap-ms-right{
+			list-style: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 9999;
+			padding: 5px 0;
+			min-width: 80px;
+			margin: 0;
+			display: none;
+			font-family: "微软雅黑";
+			font-size: 14px;
+			background-color: #fff;
+			color: #565555;
+			border: 1px solid rgba(0, 0, 0, .15);
+			box-sizing: border-box;
+			border-radius: 4px;
+			-webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.);
+			-moz-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			-ms-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			-o-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		}
+		.ms-item{
+			height: 30px;
+			line-height: 30px;
+			width: 150px;
+			text-align: center;
+			cursor: pointer;
+			padding: 5px;
+			text-align: left;
+			font-size: 14px;
+		}
+		.ms-item-span{
+			margin-left: 30px;
+		}
+		.ms-item:hover{
+			background-color: skyblue;
+			color: #FFFFFF;
+		}
+		
+		/* 结束右键菜单 */
+		
+		
+		/* 开始菜单 */
+		#div1{
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width:500px;
+			height:500px;
+			/* background-color:#35bcf3; */
+			background-color: #348DC1;
+			border-radius: 10px;
+			font-size: 14px;
+			color: #fff;
+		}
+		#div_b_1{
+			width:45%;
+			height: 100%;
+			border-right: 2px solid #6cd9ff;
+			float: left;
+		}
+		#div1 #div_b_1 ul li div{
+			cursor: pointer;
+			padding: 2px 6px;
+			line-height: 55px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			transition: background-color 0.3s;
+			color: #fff;
+		}
+		#div1 #div_b_1 ul li div img{
+			float: left;
+			margin-right: 0.5em;
+			position: relative;
+			top: 2px;
+		}
+		#div1 #div_b_1 ul li:hover{
+			border-radius: 10px;
+			width: 95%;
+			background-color: #333333;
+		}
+		/* 结束开始菜单 */
+		
+		
+		/* 便签 */
+		.id123{width:250px;height:150px;background:#666;overflow:hidden;position:absolute;top:0px;right:0px;border-radius:10px;}
+		.id123 p{background:#348DC1;cursor:pointer;color:#fff;margin:0px;height:24px;line-height:24px;}
+		.id123 p span{float:right;margin-right:5px;}
+		
+		/* 个人资料 */
+		.id1234{width:300px;height:165px;background:#666;overflow:hidden;position:absolute;top:160px;right:80px;border-radius:10px;}
+		.id1234 p{background:#348DC1;cursor:pointer;color:#fff;margin:0px;height:24px;line-height:24px;}
+		.id1234 p span{float:right;margin-right:5px;}
+		
+		/*结束便签 */
+		
+		/* 当前页面小于时 */
+		 @media screen and (max-width: 768px) {
+		    body {
+		        display: none;
+		    }
+		}
+		
+		
+		
+	</style>
+</head>
+<body onselectstart="return false;" style="-moz-user-select:none;" id="section">
+	<!-- 右键菜单 -->
+	 <div class="shade"></div>
+		<div class="wrap-ms-right" style="display: none;">
+			<li class="ms-item" data-item="0"><span class="ms-item-span">显示桌面</span></li>
+			<li class="ms-item" data-item="1"><span class="ms-item-span">关闭所有</span></li>
+			<li class="ms-item" data-item="2" style="border-bottom:1px solid #B8CBCB;"><span class="ms-item-span">刷新</span></li>
+			<li class="ms-item" data-item="3"><span class="ms-item-span">系统设置</span></li>
+			<li class="ms-item" data-item="4"><span class="ms-item-span">主题设置</span></li>
+			<li class="ms-item" data-item="5" style="border-bottom:1px solid #B8CBCB;"><span class="ms-item-span">技术支持</span></li>
+			<li class="ms-item" data-item="6"><span class="ms-item-span">注销</span></li>
+		</div>
+	
+	<!-- 结束右键菜单 -->
+	<!-- 图云飘动 -->
+<div class="mainbody">
+  <div id="cloud1" class="cloud"></div>
+  <div id="cloud2" class="cloud"></div>
+	<!-- 结束图云飘动 -->
+</div>
+<div class="dock">
+	<div id="dock-body" class="dock-body">
+		<ul>
+			<li id="li_nav" onclick="nodes()"><img src="images/icon/computer.png" title="我的电脑"></li>
+			<li id="li_nav" onclick="nodes()"><img src="images/icon/setting.png" title="控制面板"></li>
+			<li id="li_nav" onclick="nodes()"><img src="images/icon/role.png" title="权限管理"></li>
+			<li id="li_nav" onclick="nodes()"><img src="images/icon/email.png" title="电子邮件"></li>
+			<li id="li_nav" onclick="nodes()"><img src="images/icon/datasefity.png" title="数据安全"></li>
+			<li id="li_nav" onclick="nodes()"><img src="images/icon/datasefity.png" title="数据安全123"></li>
+		</ul>
+	</div>
+  <div class="dock-bottom" style="text-align: center;line-height: 56px;color: #fff;font-family: '宋体';font-weight: bold;">切换</div>
+</div>
+<div class="diskicon" style="display:inline-block; width:auto;">
+  <ul id="nav_ui">
+    <li class="nav_li" path="1.html" data-property="{title:'new_file.html',icon:'icon-32-application',minimize:'true',maximize:'true',target:'iframe',multiple:'false',winstate:'normal'}" data-style="[{name:'left',value:'650px'},{name:'top',value:'250px'},{name:'width',value:'580px'},{name:'height',value:'450px'}]"><span class="icon"><span class="icon"><img src="images/icon/icon4.png" title="开始菜单"></span><span class="text">我的相册</span></span></li>
+    <li class="nav_li" text="我的相册" icon="images/icon/folder.png" path="myphoto.html" data-property="{minimize:'true',maximize:'false',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'650px'},{name:'top',value:'250px'},{name:'width',value:'580px'},{name:'height',value:'450px'}]"><span class="icon"><span class="icon"><img src="images/icon/folder.png" title="我的相册"></span><span class="text">我的相册</span></span></li>
+    <li class="nav_li" text="创建新窗体" icon="images/icon/computer.png" path="div.html" data-property="{minimize:'true',maximize:'true',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'650px'},{name:'top',value:'250px'},{name:'width',value:'580px'},{name:'height',value:'450px'}]"><span class="icon"><span class="icon"><img src="images/icon/computer.png" title="开始菜单"></span><span class="text">我的相册</span></span></li>
+    <li class="nav_li" text="新建文档" icon="images/icon/txt.png" path="api/kindeditor.html" data-property="{minimize:'true',maximize:'true',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'650px'},{name:'top',value:'250px'},{name:'width',value:'580px'},{name:'height',value:'450px'}]"><span class="icon"><span class="icon"><img src="images/icon/txt.png" title="新建文档"></span><span class="text">新建文档</span></span></li>
+    <li class="nav_li" text="资源管理器" icon="images/icon/folder.png" path="api/explorer.html" data-property="{minimize:'true',maximize:'true',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'650px'},{name:'top',value:'150px'},{name:'width',value:'1200px'},{name:'height',value:'580px'}]"><span class="icon"><span class="icon"><img src="images/icon/folder.png" title="资源管理器"></span><span class="text">资源管理器</span></span></li>
+    <li class="nav_li" text="数据列表" icon="images/icon/icon4.png" path="new_file.html" data-property="{minimize:'true',maximize:'false',target:'iframe',multiple:'true'}" data-style="[{name:'left',value:'350px'},{name:'top',value:'0px'},{name:'width',value:'950px'},{name:'height',value:'500px'}]"><span class="icon"><span class="icon"><img src="images/icon/icon5.png" title="数据列表"></span><span class="text">数据列表</span></span></li>
+    <li class="nav_li" text="我的电脑" icon="images/icon/icon4.png" path="个人资料.html" data-property="{minimize:'true',maximize:'true',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'50px'},{name:'top',value:'250px'},{name:'width',value:'1024px'},{name:'height',value:'400px'}]"><span class="icon"><span class="icon"><img src="images/icon/system_128px_29690_easyicon.png" title="我的电脑"></span><span class="text">我的电脑</span></span></li>
+    
+	
+	
+	<li class="nav_li" text="grid数据" icon="images/icon/icon4.png" path="计算器.html" data-property="{title:'1.html',icon:'icon-32-application',minimize:'true',maximize:'true',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'300px'},{name:'top',value:'100px'},{name:'width',value:'800px'},{name:'height',value:'200px'}]"><span class="icon"><span class="icon"><img src="images/icon/add_icon.png" title="grid数据"></span><span class="text">grid数据</span></span></li>
+	
+  </ul>
+</div>
+<div class="taskbar">
+  <div class="taskbar-opacity"></div>
+</div>
+<div class="taskbar-body">
+  <ul>
+    <li class="start"><span><img src="images/admin/logo.png" id="button" title="开始菜单"></span></li>
+		<!-- 开灯关灯代码 考虑是否保留中 -->
+	<li style="line-height: 20px;color: #FFF3F3;">
+		<span id="b1" type="button">开灯</span>
+		&nbsp;&nbsp;
+		<span id="b2" type="button">关灯</span>
+	</li>
+	<li>
+		<div style="position: relative;top: 14px;right: 20px;"><input title="关闭壁纸和云的飘动" type="checkbox" class="checkboxs_yy"></div>
+	</li>
+	<!-- 开灯关灯结束 -->
+	<li class="datetime" style="line-height: 20px;">
+		<span id="datetime1"></span>
+		<span id="datetime2"></span>
+	</li>
+  </ul>
+</div>
+
+
+
+<!-- 开始菜单 -->
+<div id="div1">
+	<div id="div_b_1">
+		<ul>
+			<li path="更换壁纸.html" id="ztsz" style="list-style: none;" data-property="{title:'主题设置',icon:'icon-32-application',minimize:'true',maximize:'true',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'300px'},{name:'top',value:'100px'},{name:'width',value:'1020px'},{name:'height',value:'600px'}]"><div><img src="images/icon/file.png" style="width: 50px;height: 50px;"><span>主题设置</span></div></li>
+			<li><div><img src="images/icon/System_64px_531901_easyicon.png" style="width: 50px;height: 50px;"><span>登录日志</span></div></li>
+			<li><div><img src="images/icon/account_and_control_64px_40375_easyicon.png" style="width: 50px;height: 50px;"><span>操作日志</span></div></li>
+			<li path="技术支持.html" id="jszc" style="list-style: none;" data-property="{title:'技术支持',icon:'icon-32-application',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'500px'},{name:'top',value:'230px'},{name:'width',value:'600px'},{name:'height',value:'200px'}]"><div><img src="images/icon/system_users_64px_541187_easyicon.png" style="width: 50px;height: 50px;"><span>技术支持</span></div></li>
+			<li><div><img src="" style="width: 50px;height: 50px;"><span>客户信息管理</span></div></li>
+			<li><div><img src="" style="width: 50px;height: 50px;"><span>客户信息管理</span></div></li>
+			<li><div><img src="" style="width: 50px;height: 50px;"><span>客户信息管理</span></div></li>
+		</ul>
+	</div>
+	
+	<div id="div_b_2">
+		<table border="0" cellspacing="5" cellpadding="0">
+			<tr>
+				<th colspan="3" align="left">系统设置</th>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<li class="nav_li" id="xtsz" style="list-style: none;" text="系统设置" icon="images/icon/icon4.png" path="系统设置.html" data-property="{title:'个人资料' ,minimize:'true',maximize:'true',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'50px'},{name:'top',value:'250px'},{name:'width',value:'1024px'},{name:'height',value:'400px'}]">
+					<img width="100%" src="images/1.png" alt="错误" title="系统设置">
+					</li>
+				</th>
+				<th>
+					<li class="nav_li" id="grzl" style="list-style: none;" text="个人资料" icon="images/icon/icon4.png" path="个人资料.html" data-property="{title:'个人资料' ,minimize:'true',maximize:'true',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'50px'},{name:'top',value:'250px'},{name:'width',value:'1024px'},{name:'height',value:'400px'}]">
+					<img width="100%" src="images/2.png" alt="错误" title="个人资料">
+					</li>
+				</th>
+			</tr>
+			
+			<tr>
+				<th colspan="2">
+					<li path="计算器.html" style="list-style: none;" data-property="{title:'1.html',icon:'icon-32-application',minimize:'true',maximize:'true',target:'iframe',multiple:'false'}" data-style="[{name:'left',value:'300px'},{name:'top',value:'100px'},{name:'width',value:'800px'},{name:'height',value:'500px'}]">
+						<img width="100%"  src="images/3.png" title="计算器" alt="错误">
+					</li>
+				</th>
+				<th>
+					<img width="100%" src="images/4.png" title="注销" alt="错误">
+				</th>
+			</tr>
+		</table>
+	</div>
+</div>
+<!-- 结束开始菜单 -->
+<!-- 便签 -->
+<div class="id123">
+	<p class="nav123">便签
+		<span class="guan123">X</span>
+<!-- 		<span class="max123">口</span>
+		<span class="xiao123">—</span> -->
+	</p>
+	<textarea rows="" cols="" wrap="hard" placeholder="暂时啥都没有。" style="background-color: #fff;width: 250px;height: 150px;resize:none;font-size: 14px;padding: 6px;color: #444343;font-family: '微软雅黑';" maxlength="80" onblur="a()"></textarea>
+</div>
+
+<div class="id1234">
+	<p class="nav1234">个人资料
+		<span class="guan1234">X</span>
+<!-- 		<span class="max123">口</span>
+		<span class="xiao123">—</span> -->
+	</p>
+	<div style="background-color: #fff;width: 100%;height: 100%;">
+ 		<table border="1" width="100%" height="80%">
+			<tr>
+				<th colspan="4" rowspan="3">
+					<center>
+					<img src="images/2.png" style="width: 100px;height: 90px;display:block;margin-bottom: 3px;border-radius: 50%;">
+					<button type="button" onclick="dbon()" style="background-color: #2396B2;padding: 2px 5px 3px 6px !important;border-radius: 5px;color: #fff;font-size: 13px;width: 45%;height: 100%;">修改资料</button>
+					</center>
+				</th>
+				<th>姓名</th>
+				<th>？？？</th>
+			</tr>
+			<tr>
+				<th>职位</th>
+				<th>？？？</th>
+			</tr>
+			<tr>
+				<th>电话</th>
+				<th>？？？</th>
+			</tr>
+		</table>
+	</div>
+</div>
+<!-- 结束便签 -->
+
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script> 
+<script type="text/javascript" src="js/json.js"></script> 
+<script id="s1" type="text/javascript" src="js/jquery.cloud.js"></script>
+<script type="text/javascript" src="js/jquery.ui.win.js" charset="utf-8" language="javascript" ></script> 
+<script type="text/javascript" src="js/mouseRight.min.js"></script>
+<script src="js/鼠标点击随机颜色表情符号.user.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="js/MacNavigationBar.js"></script> -->
+<!-- <script src="js/JS点击效果.js" type="text/javascript" charset="utf-8"></script> -->
+
+<script type="text/javascript">
+	//关闭图片飘动
+	$(".checkboxs_yy").click(function(){
+		if($(this).is(":checked")){
+			//$("script[src='js/jquery.cloud.js']").remove();
+			
+			console.log("选中");
+			window.clearInterval(t1);
+			window.clearInterval(t2);
+		}else{
+			console.log("未选中");
+			t1 = setInterval(flutter, 100);
+			t2 = setInterval(bg, 100);
+		}
+
+	});
+	//结束背景图片和小云朵
+
+	
+	
+	
+	//桌面修改资料调用个人资料窗口
+	function dbon(){
+		$("#grzl").dblclick();
+		
+	}
+	
+	
+	/* 切换节点的时候产生动画效果 */
+	function nodes(id){
+		var t;
+		var timer = null;
+		var startTime = Date.now();
+		
+		//获取多个ID
+		var articleIdList = new Array();
+		var cid = $("li.nav_li");
+		if(cid.val() != undefined || cid.val() != null){
+			console.log("进入IF判断");
+			
+			timer=setInterval(function(){
+				for (var i = 0;i< cid.length; i++) {
+					var leftDis = cid[i].offsetLeft+0.1*(Date.now()-startTime)/2;
+					 leftDis = leftDis > 2000 ? 2000 : leftDis;
+			         cid[i].style.left=leftDis+'px';
+					console.log("进入开始:");
+					// cid[i].style.left=leftDis+'px';
+				};
+			},1);
+			
+			var t2 = setInterval(function(){
+				$("#nav_ui").empty();
+				 // $("#nav_ui  li:gt(0)").remove();
+				console.log("准备添加");
+				$("#nav_ui").append(
+					"<li class='nav_li' path='个人资料.html' data-property=\"{title:'new_file.html',icon:'icon-32-application',minimize:'true',maximize:'true',target:'iframe',multiple:'false',winstate:'normal'}\" data-style=\"[{name:'left',value:'650px'},{name:'top',value:'250px'},{name:'width',value:'580px'},{name:'height',value:'450px'}]\"><span class='icon'><span class='icon'><img src='images/icon/icon4.png' title='开始菜单'></span><span class='text'>我的相册</span></span></li>"+
+					"<li class='nav_li' path='个人资料.html' data-property=\"{title:'new_file.html',icon:'icon-32-application',minimize:'true',maximize:'true',target:'iframe',multiple:'false',winstate:'normal'}\" data-style=\"[{name:'left',value:'650px'},{name:'top',value:'250px'},{name:'width',value:'580px'},{name:'height',value:'450px'}]\"><span class='icon'><span class='icon'><img src='images/icon/icon4.png' title='开始菜单'></span><span class='text'>我的电脑</span></span></li>"
+				);
+				$.arrayDiskIcon(105, 95);
+				 window.clearInterval(timer);
+				 window.clearInterval(t2);
+			},500);
+			
+			
+		}else{
+			window.clearInterval(timer)
+			window.clearInterval(t2);
+		}
+	}
+	/* 结束切换节点的时候产生动画效果 */
+	
+	
+	//点击图片出页面 
+$(function(){
+	$("#div_b_2 li").dblclick(function(){	//双击执行图标程序
+		//初始化加载窗口
+		$.openWin($(this), {
+			left:150,
+			top:250,
+			width:400,
+			height:500
+		});
+	});
+	
+	$("#div_b_1 li").dblclick(function(){
+		//初始化加载窗口
+		$.openWin($(this), {
+			left:150,
+			top:250,
+			width:400,
+			height:500
+		});
+	});
+});	
+	
+/* 获取当前时间 */
+setInterval(function() {
+	var s = arr=CurentTime().split(" ");
+	$("#datetime1").html(s[1]);
+	$("#datetime2").html(s[0]);
+},1000);
+
+function CurentTime()
+	{ 
+		var now = new Date();
+		
+		var year = now.getFullYear();       //年
+		var month = now.getMonth() + 1;     //月
+		var day = now.getDate();            //日
+		
+		var hh = now.getHours();            //时
+		var mm = now.getMinutes();          //分
+		var ss = now.getSeconds();           //秒
+		
+		var clock = year + "-";
+		
+		if(month < 10)
+			clock += "0";
+		
+		clock += month + "-";
+		
+		if(day < 10)
+			clock += "0";
+			
+		clock += day + " ";
+		
+		if(hh < 10)
+			clock += "0";
+			
+		clock += hh + ":";
+		if (mm < 10) clock += '0'; 
+		clock += mm + ":"; 
+		
+		if (ss < 10) clock += '0'; 
+		clock += ss; 
+		
+		
+		
+		return clock;
+}
+	/* 获取当前时间结束 */
+	
+	/* 开灯关灯代码 */
+	// 给button1添加事件,把背景色设置为白色
+	$('#b1').click(function() {
+		$('.mainbody').css("background-color", "transparent");
+	});
+	// 给button2添加事件,把背景色设置为黑色
+	$('#b2').click(function() {
+		 $('.mainbody').css({
+				"background-color":"#000",
+				"opacity":"0.6"
+			});
+	});
+	/* 开灯关灯代码结束 */
+	
+	/* 桌面图标 */
+$(document).ready(function(e) {
+		
+	$.Init();	//初始化
+	
+	$(window).resize(function(){
+		
+		$('.window[status="maximized"]').css({'left':'0px','top':'0px','width':$(window).outerWidth()+'px', 'height':$(window).outerHeight()-40+'px'});	
+		$('.window[status="maximized"] .window-body').css({'height':$(window).outerHeight()-25 - 25,'width':$(window).outerWidth() - 2});	
+		
+	});
+});
+
+function msg(m){
+	alert(m);
+}
+/* 结束桌面图标 */
+
+
+/* win开始菜单 */
+function stopPropagation(e) {
+	//点击#button时要阻止冒泡，否则.pop是不显示的，
+	//因为冒泡了，会执行到下面的方法。
+	 var ev = e || window.event;
+	 if (ev.stopPropagation) {
+		 ev.stopPropagation();
+	 }
+	 else if (window.event) {
+		 window.event.cancelBubble = true;//兼容IE
+	 }
+ }
+ $(document).bind('click', function () {
+	 $("#div1").hide();
+ });
+ $("#div1").click(function (e) {
+	 stopPropagation(e);
+ });
+ 
+	
+$(document).ready(function(){
+	$("#div1").hide();
+	$("#button").click(function(e){
+		$("#div1").fadeToggle();
+		stopPropagation(e);
+	});
+});
+/* 结束win开始菜单 */
+
+
+
+/* 可拖动div */
+$(function(){
+	//便签
+	//定义各个DOM元素及按钮，obj是整个窗口，objcurs窗口的导航，guan是窗口关闭按钮，xiao是缩小到任务栏按钮，max是最大化窗口按钮
+	var obj=$('.id123'),objcur=$('.nav123'),guan=$('.guan123'),xiao=$('.xiao123'),max=$('.max123');
+	//定义所有变量，tuo为鼠标是否在导航上按下
+	var tuo=false;
+	//记录窗口最小最大前的位置及宽高
+	var lefts,tops,widths,heights;
+	//这里获取窗口元素的宽高，用于窗口最小最大后还原窗口，因为窗口在真正的项目中是可以拉大拉小的，而我这里没有开发此功能
+	widths=obj.width();
+	heights=obj.height();
+	
+	
+	
+	var X,Y;
+	objcur.mousedown(function(e){
+		X=e.pageX-obj.offset().left;
+		Y=e.pageY-obj.offset().top;
+		tuo=true;
+	})
+	
+	
+	$(document).mousemove(function(e){
+		//如果当前窗口为100%则不允许拖动
+		if(obj.width() == $(document).width()){
+			tuo=false;
+		}
+		if(tuo){
+			
+			obj.css({
+				left:e.pageX-X,
+				top:e.pageY-Y
+			})
+			lefts=obj.offset().left;
+			tops=obj.offset().top;
+		}
+	}).mouseup(function(){
+		tuo=false;
+	})
+	
+	//窗口最大化
+	var shu=0;
+	//双击导航框缩放窗口
+	objcur.dblclick(function(){
+		max.click();
+	})
+	//单击缩放按钮缩放窗口
+	max.click(function(){
+		if(shu == 0){
+			obj.animate({
+				width:'100%',
+				height:'100%',
+				left:'0px',
+				top:'0px'
+			},200);
+			shu = 1;
+		}else if(shu ==1){
+			obj.animate({
+				width:widths,
+				height:heights,
+				left:lefts,
+				top:tops
+			},200);
+			shu = 0;
+		}
+	})
+	
+	//关闭窗口，也就删除了DOM元素
+	guan.click(function(){
+		obj.remove();
+	})
+	
+	//缩小到任务栏
+	var xiaos=1;
+	xiao.click(function(){
+		if(xiaos == 1){
+			var s=$(document).height();//此处获取浏览器可视窗口的高度，也存在问题，当我们的窗口拉到浏览器上或下可视窗口外的时候，那么浏览器可视窗口的高度也被增大了，所以当我们的窗口拉到浏览器可视窗口上或下的外面的时候，我们缩小窗口到任务栏的话就将看不到缩小后的窗口，最简单的办法就是把此变量设置成全局变量，当页面加载的时候此变量就初始化了就不会被窗口拉出的时候增大
+			obj.animate({
+				left:'0px',
+				top:s-24,
+				width:'150px',
+				height:'24px'
+			},200);
+			xiaos =0;
+		}else if(xiaos == 0){
+			obj.animate({
+				width:widths,
+				height:heights,
+				left:lefts,
+				top:tops
+			},200);
+			xiaos =1;
+		}
+	})
+	
+});
+function a(){
+	alert("保存成功");
+	
+}
+
+
+//个人资料
+$(function(){
+	//定义各个DOM元素及按钮，obj是整个窗口，objcurs窗口的导航，guan是窗口关闭按钮，xiao是缩小到任务栏按钮，max是最大化窗口按钮
+	var obj=$('.id1234'),objcur=$('.nav1234'),guan=$('.guan1234'),xiao=$('.xiao1234'),max=$('.max1234');
+	//定义所有变量，tuo为鼠标是否在导航上按下
+	var tuo=false;
+	//记录窗口最小最大前的位置及宽高
+	var lefts,tops,widths,heights;
+	//这里获取窗口元素的宽高，用于窗口最小最大后还原窗口，因为窗口在真正的项目中是可以拉大拉小的，而我这里没有开发此功能
+	widths=obj.width();
+	heights=obj.height();
+	
+	
+	
+	var X,Y;
+	objcur.mousedown(function(e){
+		X=e.pageX-obj.offset().left;
+		Y=e.pageY-obj.offset().top;
+		tuo=true;
+	})
+	
+	
+	$(document).mousemove(function(e){
+		//如果当前窗口为100%则不允许拖动
+		if(obj.width() == $(document).width()){
+			tuo=false;
+		}
+		if(tuo){
+			
+			obj.css({
+				left:e.pageX-X,
+				top:e.pageY-Y
+			})
+			lefts=obj.offset().left;
+			tops=obj.offset().top;
+		}
+	}).mouseup(function(){
+		tuo=false;
+	})
+	
+	//窗口最大化
+	var shu=0;
+	//双击导航框缩放窗口
+	objcur.dblclick(function(){
+		max.click();
+	})
+	//单击缩放按钮缩放窗口
+	max.click(function(){
+		if(shu == 0){
+			obj.animate({
+				width:'100%',
+				height:'100%',
+				left:'0px',
+				top:'0px'
+			},200);
+			shu = 1;
+		}else if(shu ==1){
+			obj.animate({
+				width:widths,
+				height:heights,
+				left:lefts,
+				top:tops
+			},200);
+			shu = 0;
+		}
+	})
+	
+	//关闭窗口，也就删除了DOM元素
+	guan.click(function(){
+		obj.remove();
+	})
+	
+	//缩小到任务栏
+	var xiaos=1;
+	xiao.click(function(){
+		if(xiaos == 1){
+			var s=$(document).height();//此处获取浏览器可视窗口的高度，也存在问题，当我们的窗口拉到浏览器上或下可视窗口外的时候，那么浏览器可视窗口的高度也被增大了，所以当我们的窗口拉到浏览器可视窗口上或下的外面的时候，我们缩小窗口到任务栏的话就将看不到缩小后的窗口，最简单的办法就是把此变量设置成全局变量，当页面加载的时候此变量就初始化了就不会被窗口拉出的时候增大
+			obj.animate({
+				left:'0px',
+				top:s-24,
+				width:'150px',
+				height:'24px'
+			},200);
+			xiaos =0;
+		}else if(xiaos == 0){
+			obj.animate({
+				width:widths,
+				height:heights,
+				left:lefts,
+				top:tops
+			},200);
+			xiaos =1;
+		}
+	})
+	
+});
+
+/* 结束可拖动div */
+
+/* 右键菜单 */
+$('body').mouseRight({menu: [{
+	itemName: "0",
+	callback: function() {
+		//显示桌面
+		$("body .window").each(function(){
+			$.minimize($(this));
+		});
+	}
+}, {
+	itemName: "1",
+	callback: function() {
+		//alert('关闭所有');
+		$("body .window").each(function(){
+			$.winClose($(this));
+		});
+	}
+		
+},{
+	itemName: "2",
+	callback: function() {
+		//刷新
+		location.reload();/* history.go(0); */
+	}
+},{
+	itemName: "3",
+	callback: function() {
+		$("#xtsz").dblclick();
+	}
+},{
+	itemName: "4",
+	callback: function() {
+		$("#ztsz").dblclick();
+	}
+},{
+	itemName: "5",
+	callback: function() {
+		$("#jszc").dblclick();
+	}
+},{
+	itemName: "6",
+	callback: function() {
+		//alert('注销')
+	}
+}
+
+]});
+
+/* 结束右键菜单 */
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

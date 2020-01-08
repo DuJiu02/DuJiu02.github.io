@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>鼠标右键插件</title>
+	
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+
+<style type="text/css">
+.shade{
+	width:100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+.wrap-ms-right{
+	list-style: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	padding: 5px 0;
+	min-width: 80px;
+	margin: 0;
+	display: none;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	background-color: #fff;
+	color: #565555;
+	border: 1px solid rgba(0, 0, 0, .15);
+	box-sizing: border-box;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	-ms-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	-o-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.ms-item{
+	height: 30px;
+	line-height: 30px;
+	width: 150px;
+	text-align: center;
+	cursor: pointer;
+	padding: 5px;
+	text-align: left;
+	font-size: 14px;
+}
+.ms-item-span{
+	margin-left: 30px;
+}
+.ms-item:hover{
+	background-color: skyblue;
+	color: #FFFFFF;
+}
+
+</style>
+</head>
+<body>
+<div class="shade"></div>
+	<div class="wrap-ms-right" style="display: none;">
+		<li class="ms-item" data-item="0"><span class="ms-item-span">显示桌面</span></li>
+		<li class="ms-item" data-item="1"><span class="ms-item-span">关闭所有</span></li>
+		<li class="ms-item" data-item="2" style="border-bottom:1px solid #B8CBCB;"><span class="ms-item-span">刷新</span></li>
+		<li class="ms-item" data-item="4"><span class="ms-item-span">系统设置</span></li>
+		<li class="ms-item" data-item="5"><span class="ms-item-span">主题设置</span></li>
+		<li class="ms-item" data-item="6" style="border-bottom:1px solid #B8CBCB;"><span class="ms-item-span">技术支持</span></li>
+		<li class="ms-item" data-item="7"><span class="ms-item-span">注销</span></li>
+	</div>
+
+<script src="js/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="js/mouseRight.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+$('body').mouseRight({menu: [{
+	itemName: "添加",
+	callback: function() {alert('我是添加')}
+}, {
+	itemName: "修改",
+	callback: function() {alert('我是修改')}
+},{
+	itemName: "粘贴",
+	callback: function() {alert('我是粘贴')}
+},{
+	itemName: "删除",
+	callback: function() {alert('我是删除')}
+}]});
+</script>
+
+
+</body></html>

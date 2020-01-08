@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+	</head>
+	<body>
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+		  <legend>系统设置（此处功能未实现）</legend>
+		</fieldset>  
+		 
+		<div class="layui-form">
+		  <table class="layui-table">
+ 		    <colgroup>
+				<col width="50">
+				<col width="150">
+			    <col width="50">
+				<col width="150">
+		      <col>
+		    </colgroup>
+		      <tr>
+		        <th>系统名称</th>
+		        <th><input type="text" readonly="readonly" name="" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="CRM客服管理系统"></th>
+				<th>桌面便签</th>
+				<th>
+					<input type="radio" name="note" value="显示" title="显示">
+					<input type="radio" name="note" value="不显示" title="不显示">
+					<i title="页面是否显示便签" class="layui-icon" style="background-color: #E9EAEC;border-radius:50%;">&#xe607;</i>   
+				</th>
+		      </tr> 
+		      <tr>
+		        <th>个人资料</th>
+		        <th>
+					<input type="radio" name="personalData" value="显示" title="显示">
+					<input type="radio" name="personalData" value="不显示" title="不显示">
+					<i title="页面是否显示个人资料" class="layui-icon" style="background-color: #E9EAEC;border-radius:50%;">&#xe607;</i>   
+				</th>
+				<th>登录风格</th>
+				<th>
+					<input type="radio" name="login" value="显示" title="风格一">
+					<input type="radio" name="login" value="不显示" title="风格二">
+					<input type="radio" name="login" value="不显示" title="风格三">
+					<input type="radio" name="login" value="不显示" title="风格四">
+					<i title="切换登录风格" class="layui-icon" style="background-color: #E9EAEC;border-radius:50%;">&#xe607;</i>  
+				</th>
+		      </tr>
+		      <tr>
+		        <th colspan="4">
+					<center>
+						<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+						<!-- <button type="button" class="layui-btn layui-btn-primary" onclick="window.close()">关闭</button> -->
+					</center>
+				</th>
+		      </tr>
+		     
+		  </table>
+		</div>
+	</body>
+	<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    return false;
+  });
+});
+</script>
+</html>
